@@ -210,6 +210,13 @@ func decodeResponse(body io.Reader, v any) error {
 		return nil
 	}
 
+	bodyBytes, err := io.ReadAll(body)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(bodyBytes)
+
 	switch o := v.(type) {
 	case *string:
 		return decodeString(body, o)
