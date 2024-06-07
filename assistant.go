@@ -14,17 +14,21 @@ const (
 )
 
 type Assistant struct {
-	ID           string          `json:"id"`
-	Object       string          `json:"object"`
-	CreatedAt    int64           `json:"created_at"`
-	Name         *string         `json:"name,omitempty"`
-	Description  *string         `json:"description,omitempty"`
-	Model        string          `json:"model"`
-	Instructions *string         `json:"instructions,omitempty"`
-	Tools        []AssistantTool `json:"tools"`
-	FileIDs      []string        `json:"file_ids,omitempty"`
-	Metadata     map[string]any  `json:"metadata,omitempty"`
-
+	ID            string          `json:"id"`
+	Object        string          `json:"object"`
+	CreatedAt     int64           `json:"created_at"`
+	Name          *string         `json:"name,omitempty"`
+	Description   *string         `json:"description,omitempty"`
+	Model         string          `json:"model"`
+	Instructions  *string         `json:"instructions,omitempty"`
+	Tools         []AssistantTool `json:"tools"`
+	FileIDs       []string        `json:"file_ids,omitempty"`
+	Metadata      map[string]any  `json:"metadata,omitempty"`
+	ToolResources struct {
+		FileSearch struct {
+			VectorStoreIds []string `json:"vector_store_ids"`
+		} `json:"file_search"`
+	} `json:"tool_resources"`
 	httpHeader
 }
 
