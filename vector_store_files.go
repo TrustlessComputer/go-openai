@@ -2,6 +2,7 @@ package openai
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 )
 
@@ -28,8 +29,13 @@ type VectorStoreFileResp struct {
 	httpHeader
 }
 
-func (c *Client) CreateVectorStoreFile(ctx context.Context, request VectorStoreFileResp) (response VectorStoreFileResp, err error) {
-	req, err := c.newRequest(ctx, http.MethodPost, c.fullURL(vectorStoreSuffix), withBody(request),
+func (c *Client) CreateVectorStoreFile(ctx context.Context, vectorStoreId string, request VectorStoreFileRequest) (response VectorStoreFileResp, err error) {
+	urlSuffix := fmt.Sprintf("/vector_stores/%s/files", vectorStoreId)
+	req, err := c.newRequest(
+		ctx,
+		http.MethodPost,
+		c.fullURL(urlSuffix),
+		withBody(request),
 		withBetaAssistantVersion(c.config.AssistantVersion))
 	if err != nil {
 		return
