@@ -11,6 +11,7 @@ import (
 const (
 	assistantsSuffix      = "/assistants"
 	assistantsFilesSuffix = "/files"
+	vectorStoreSuffix     = "/vector_stores"
 )
 
 type Assistant struct {
