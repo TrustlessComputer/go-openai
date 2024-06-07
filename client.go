@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strings"
 
@@ -136,6 +137,13 @@ func (c *Client) sendRequest(req *http.Request, v Response) error {
 	if isFailureStatusCode(res) {
 		return c.handleErrorResp(res)
 	}
+
+	bodyBytes, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bodyString := string(bodyBytes)
+	fmt.Println(bodyString)
 
 	return decodeResponse(res.Body, v)
 }
